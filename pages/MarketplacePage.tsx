@@ -917,26 +917,30 @@ const MarketplacePage: React.FC = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-4xl font-bold text-slate-800 dark:text-slate-100">{t('sidebar.marketplace')}</h2>
-                <p className="text-slate-500 dark:text-slate-400 mt-1">{t('marketplace.main.description')}</p>
+                <h2 className="font-display text-4xl font-bold text-foreground">{t('sidebar.marketplace')}</h2>
+                <p className="text-muted-foreground mt-2">{t('marketplace.main.description')}</p>
             </div>
 
             {/* Quick Start Wizards */}
-            <Card>
-                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-                    <button onClick={() => setActiveView('wizard')} className="p-6 bg-indigo-50 dark:bg-indigo-900/50 rounded-2xl text-left hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-colors">
-                        <h3 className="font-bold text-lg text-indigo-600 dark:text-indigo-400 flex items-center gap-3">
-                           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+            <Card hover={false}>
+                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
+                    <button onClick={() => setActiveView('wizard')} className="p-6 bg-primary/10 rounded-2xl text-left hover:bg-primary/20 transition-all duration-300 group">
+                        <h3 className="font-display font-bold text-lg text-primary flex items-center gap-3">
+                           <div className="p-2 rounded-xl bg-gradient-to-br from-primary to-primary-glow text-white group-hover:shadow-warm transition-shadow">
+                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                           </div>
                             {t('marketplace.wizard.button')}
                         </h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{t('marketplace.wizard.buttonDescription')}</p>
+                        <p className="text-muted-foreground text-sm mt-2">{t('marketplace.wizard.buttonDescription')}</p>
                     </button>
-                    <button onClick={() => setActiveView('voice')} className="p-6 bg-amber-50 dark:bg-amber-900/50 rounded-2xl text-left hover:bg-amber-100 dark:hover:bg-amber-900 transition-colors">
-                        <h3 className="font-bold text-lg text-amber-600 dark:text-amber-400 flex items-center gap-3">
-                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                    <button onClick={() => setActiveView('voice')} className="p-6 bg-accent/10 rounded-2xl text-left hover:bg-accent/20 transition-all duration-300 group">
+                        <h3 className="font-display font-bold text-lg text-accent-foreground flex items-center gap-3">
+                            <div className="p-2 rounded-xl bg-gradient-to-br from-accent to-primary text-white group-hover:shadow-warm transition-shadow">
+                              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                            </div>
                             {t('marketplace.voice.button')}
                         </h3>
-                        <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{t('marketplace.voice.buttonDescription')}</p>
+                        <p className="text-muted-foreground text-sm mt-2">{t('marketplace.voice.buttonDescription')}</p>
                     </button>
                 </CardContent>
             </Card>
@@ -945,10 +949,10 @@ const MarketplacePage: React.FC = () => {
                 {/* Individual Tools */}
                 <Card className="h-full flex flex-col">
                     <CardHeader>
-                        <div className="border-b border-slate-200 dark:border-slate-700">
+                        <div className="border-b border-border">
                              <nav className="-mb-px flex space-x-6" aria-label="Tabs">
                                 {(['description', 'pricing', 'video'] as const).map(tab => (
-                                    <button key={tab} onClick={() => setActiveTab(tab)} className={`whitespace-nowrap pb-3 px-1 border-b-2 font-semibold text-base ${activeTab === tab ? 'border-teal-500 text-teal-600' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}>
+                                    <button key={tab} onClick={() => setActiveTab(tab)} className={`whitespace-nowrap pb-3 px-1 border-b-2 font-semibold text-base transition-colors ${activeTab === tab ? 'border-primary text-primary' : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border'}`}>
                                         {t(`marketplace.tabs.${tab}`)}
                                     </button>
                                 ))}
