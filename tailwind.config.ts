@@ -50,8 +50,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
-        sans: ['"Source Sans 3"', 'system-ui', 'sans-serif'],
+        display: ['"Libre Baskerville"', 'Georgia', 'serif'],
+        sans: ['"Nunito"', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
