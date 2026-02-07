@@ -89,6 +89,27 @@ After adding the domain, wait a minute, then refresh this app.`;
                 className="absolute bottom-1/4 -right-24 w-96 h-96 bg-accent/20 rounded-full blur-3xl" 
             />
 
+            {/* Floating particles */}
+            {[...Array(5)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    className="absolute w-1.5 h-1.5 bg-primary/30 rounded-full"
+                    style={{
+                        left: `${15 + i * 18}%`,
+                        top: `${20 + (i % 3) * 20}%`,
+                    }}
+                    animate={{
+                        y: [0, -15, 0],
+                        opacity: [0.2, 0.6, 0.2],
+                    }}
+                    transition={{
+                        duration: 3 + i * 0.4,
+                        repeat: Infinity,
+                        delay: i * 0.2,
+                    }}
+                />
+            ))}
+
             {/* Guest button */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
