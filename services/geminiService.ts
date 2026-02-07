@@ -7,7 +7,7 @@ export const generateText = async (prompt: string): Promise<string> => {
             model: 'gemini-2.5-flash',
             contents: prompt,
         });
-        return response.text;
+        return response.text ?? '';
     } catch (error: any) {
         console.error("Error generating text:", error);
         const errorMessage = String(error.message || error);
@@ -111,7 +111,7 @@ export const generateProductDetailsFromInput = async (
                 }
             }
         });
-        return response.text;
+        return response.text ?? '';
     } catch (error: any) {
         console.error("Error processing input for details:", error);
         const errorMessage = String(error.message || error);
@@ -149,7 +149,7 @@ export const transcribeAudio = async (
                 ]
             },
         });
-        return response.text;
+        return response.text ?? '';
     } catch (error: any) {
         console.error("Error transcribing audio:", error);
         const errorMessage = String(error.message || error);
@@ -271,7 +271,7 @@ export const transcribeAndGenerateFromAudio = async (
                 }
             }
         });
-        return response.text;
+        return response.text ?? '';
     } catch (error: any) {
         console.error("Error processing audio:", error);
         const errorMessage = String(error.message || error);
@@ -350,7 +350,7 @@ export const generateSocialMediaPost = async (platform: string, prompt: string, 
                 }
             }
         });
-        return response.text;
+        return response.text ?? '';
     } catch (error: any) {
         console.error("Error generating social media post:", error);
         const errorMessage = String(error.message || error);
@@ -476,7 +476,7 @@ export const editImageWithAI = async (
         if (!response.candidates || response.candidates.length === 0) {
             throw new Error("No candidates returned from AI.");
         }
-        return response.candidates[0].content.parts;
+        return response.candidates[0].content?.parts ?? [];
     } catch (error: any) {
         console.error("Error editing image:", error);
         const errorMessage = String(error.message || error);
