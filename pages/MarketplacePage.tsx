@@ -806,7 +806,7 @@ const MarketplacePage: React.FC = () => {
         setPricingResult(null);
         try {
             const result = await generatePricingSuggestion(pricingPrompt, language);
-            const text = result.text;
+            const text = result.text ?? '';
             let parsed = null;
             try {
                 // Extract JSON from markdown code block

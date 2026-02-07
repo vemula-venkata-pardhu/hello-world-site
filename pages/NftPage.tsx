@@ -75,7 +75,7 @@ const NftPage: React.FC = () => {
     setCertificateData(null);
     setError(null);
     
-    const prompts = {
+    const prompts: Record<string, string> = {
         en: `Generate a compelling 'Heritage Story' for a certificate of authenticity, around 50-70 words. The story should sound official and connect the artisan, their craft, and the specific item.
         - Artisan: ${currentUser.name}
         - Item Name: ${itemName}
@@ -89,7 +89,7 @@ const NftPage: React.FC = () => {
         - शिल्प परंपरा: ${craftTradition}
         कौशल, परंपरा और दस्तकारी कला की सुंदरता पर ध्यान दें।`
     };
-    const prompt = prompts[language];
+    const prompt = prompts[language] || prompts.en;
     
     try {
         const heritageStory = await generateText(prompt);

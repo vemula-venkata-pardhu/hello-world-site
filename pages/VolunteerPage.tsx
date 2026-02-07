@@ -179,6 +179,7 @@ const VolunteerPage: React.FC = () => {
                         craftTradition: viewingCertificate.skills.join(', '),
                         certifiedDate: new Date(viewingCertificate.issuedDate),
                         heritageStory: viewingCertificate.certificateText,
+                        image: viewingCertificate.artisanAvatar,
                     }}
                     onClose={() => setViewingCertificate(null)}
                 />

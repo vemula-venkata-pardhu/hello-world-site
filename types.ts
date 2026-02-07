@@ -18,6 +18,7 @@ export interface Artisan extends User {
   bio: string;
   story: string;
   storyVideoUrl: string;
+  email?: string;
 }
 
 
@@ -65,6 +66,7 @@ export interface Volunteer extends User {
   projectsCompleted: number;
   completedProjects: CompletedProject[];
   testimonials: Testimonial[];
+  email?: string;
 }
 
 export interface Project {

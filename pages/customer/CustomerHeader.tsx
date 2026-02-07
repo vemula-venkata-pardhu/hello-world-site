@@ -1,8 +1,8 @@
 import React, { useContext, useState, useMemo } from 'react';
 import { AppContext } from '../../contexts/AppContext';
-import { LogoIcon } from '../common/Icons';
+import { LogoIcon } from '../../components/common/Icons';
 import { useLocalization } from '../../hooks/useLocalization';
-import Button from '../common/Button';
+import Button from '../../components/common/Button';
 import type { Role } from '../../types';
 
 const RoleSwitcher: React.FC = () => {
