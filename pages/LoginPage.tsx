@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { motion } from 'framer-motion';
 import { AppContext } from '../contexts/AppContext';
 import { useLocalization } from '../hooks/useLocalization';
 import { LogoIcon, GoogleIcon } from '../components/common/Icons';
@@ -68,92 +69,152 @@ After adding the domain, wait a minute, then refresh this app.`;
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center p-4 font-sans relative overflow-hidden">
-            <Button
-                variant="ghost"
-                onClick={bypassLogin}
-                className="absolute top-4 right-4 z-20"
-            >
-                Enter as Guest
-            </Button>
-            {/* Background decorative shapes */}
-            <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 w-96 h-96 bg-teal-200/50 dark:bg-teal-900/40 rounded-full blur-3xl animate-pulse" />
-            <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-96 h-96 bg-amber-200/50 dark:bg-amber-900/40 rounded-full blur-3xl animate-pulse animation-delay-4000" />
+        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 font-sans relative overflow-hidden">
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-background via-secondary/20 to-background" />
+            <motion.div 
+                animate={{ 
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                }}
+                transition={{ duration: 8, repeat: Infinity }}
+                className="absolute top-1/4 -left-24 w-96 h-96 bg-primary/20 rounded-full blur-3xl" 
+            />
+            <motion.div 
+                animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.2, 0.4, 0.2]
+                }}
+                transition={{ duration: 10, repeat: Infinity, delay: 1 }}
+                className="absolute bottom-1/4 -right-24 w-96 h-96 bg-accent/20 rounded-full blur-3xl" 
+            />
 
-            <div className="w-full max-w-md relative z-10">
-                <div className="flex justify-center items-center space-x-3 mb-6">
-                    <LogoIcon />
-                    <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">
+            {/* Guest button */}
+            <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="absolute top-6 right-6 z-20"
+            >
+                <Button variant="ghost" onClick={bypassLogin} className="text-sm">
+                    Continue as Guest
+                </Button>
+            </motion.div>
+
+            <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full max-w-md relative z-10"
+            >
+                {/* Logo */}
+                <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.1, duration: 0.5 }}
+                    className="flex justify-center items-center space-x-3 mb-8"
+                >
+                    <div className="p-3 rounded-2xl bg-gradient-to-br from-primary to-accent shadow-warm">
+                        <LogoIcon />
+                    </div>
+                    <h1 className="font-display text-3xl font-bold text-foreground">
                         Apna Udyog
                     </h1>
-                </div>
+                </motion.div>
 
-                <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-300/20 dark:shadow-black/20">
-                    <div className="p-8">
-                        <div className="text-center">
-                            <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100">Welcome Back!</h2>
-                            <p className="text-slate-500 dark:text-slate-400 mt-1">Log in to continue your journey.</p>
-                        </div>
+                {/* Card */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                    className="relative"
+                >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-50" />
+                    <div className="relative bg-card/90 backdrop-blur-xl rounded-3xl shadow-elevated border border-border/50 overflow-hidden">
+                        <div className="p-8">
+                            <div className="text-center mb-8">
+                                <h2 className="font-display text-2xl font-bold text-foreground">Welcome Back!</h2>
+                                <p className="text-muted-foreground mt-2">Log in to continue your journey.</p>
+                            </div>
 
-                        <div className="mt-6">
                             <form onSubmit={handleLogin} className="space-y-5">
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
+                                    <label htmlFor="email" className="block text-sm font-semibold text-foreground mb-2">
+                                        Email Address
+                                    </label>
                                     <input
                                         id="email"
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         required
-                                        className="w-full p-3 bg-slate-100 dark:bg-slate-900/50 text-slate-800 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 rounded-lg transition-colors focus:bg-white dark:focus:bg-slate-800 focus:border-teal-500 outline-none"
+                                        className="w-full px-4 py-3 bg-muted/50 text-foreground border-2 border-border rounded-xl transition-all duration-300 focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none placeholder:text-muted-foreground"
+                                        placeholder="you@example.com"
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="password" className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Password</label>
+                                    <label htmlFor="password" className="block text-sm font-semibold text-foreground mb-2">
+                                        Password
+                                    </label>
                                     <input
                                         id="password"
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                         required
-                                        className="w-full p-3 bg-slate-100 dark:bg-slate-900/50 text-slate-800 dark:text-slate-200 border-2 border-slate-200 dark:border-slate-700 rounded-lg transition-colors focus:bg-white dark:focus:bg-slate-800 focus:border-teal-500 outline-none"
+                                        className="w-full px-4 py-3 bg-muted/50 text-foreground border-2 border-border rounded-xl transition-all duration-300 focus:bg-card focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none placeholder:text-muted-foreground"
+                                        placeholder="••••••••"
                                     />
                                 </div>
-                                {error && <pre className="text-sm text-red-600 p-3 bg-red-50 dark:bg-red-900/20 rounded-md whitespace-pre-wrap font-sans">{error}</pre>}
-                                <Button type="submit" className="w-full text-base py-3 mt-2" isLoading={isLoading}>
+                                
+                                {error && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        className="p-4 bg-destructive/10 border border-destructive/20 rounded-xl"
+                                    >
+                                        <pre className="text-sm text-destructive whitespace-pre-wrap font-sans">{error}</pre>
+                                    </motion.div>
+                                )}
+                                
+                                <Button type="submit" className="w-full py-3 text-base" isLoading={isLoading}>
                                     Log In
                                 </Button>
                             </form>
-                        </div>
 
-                        <div className="relative my-6">
-                            <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                                <div className="w-full border-t border-slate-300 dark:border-slate-600" />
+                            <div className="relative my-8">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-border" />
+                                </div>
+                                <div className="relative flex justify-center text-sm">
+                                    <span className="bg-card px-4 text-muted-foreground">Or continue with</span>
+                                </div>
                             </div>
-                            <div className="relative flex justify-center text-sm">
-                                <span className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm px-2 text-slate-500 dark:text-slate-400">Or continue with</span>
-                            </div>
-                        </div>
 
-                        <div>
-                            <Button variant="social" type="button" onClick={handleGoogleLogin} className="w-full" isLoading={isGoogleLoading}>
+                            <Button 
+                                variant="secondary" 
+                                type="button" 
+                                onClick={handleGoogleLogin} 
+                                className="w-full py-3" 
+                                isLoading={isGoogleLoading}
+                            >
                                 <GoogleIcon className="w-5 h-5 mr-3" />
                                 Log In with Google
                             </Button>
-                        </div>
 
-                        <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-6">
-                            Don't have an account?{' '}
-                            <button onClick={() => setAuthPage('signup')} className="font-semibold text-teal-600 dark:text-teal-400 hover:underline">
-                                Sign Up
-                            </button>
-                        </p>
+                            <p className="text-center text-sm text-muted-foreground mt-8">
+                                Don't have an account?{' '}
+                                <button 
+                                    onClick={() => setAuthPage('signup')} 
+                                    className="font-semibold text-primary hover:text-primary/80 transition-colors"
+                                >
+                                    Sign Up
+                                </button>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <style>{`
-            .animation-delay-4000 { animation-delay: 4s; }
-        `}</style>
+                </motion.div>
+            </motion.div>
         </div>
     );
 };
